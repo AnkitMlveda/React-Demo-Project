@@ -58,26 +58,26 @@ export default function Signup(){
 
         if(getusernameerror == "" && getuserageerror == "" && getuseremailerror == "" && getuserpasserror == "" && getusername != "" && getuserage != "" && getuseremail != "" && getuserpass != ""){
             alert('Sigup Sucessfully!');
-            setusername("");
-            setuseremail("");
-            setuserpass("");
-            getage(setuserage(document.getElementById("age").value = ""));
+            // setusername("");
+            // setuseremail("");
+            // setuserpass("");
+            // getage(setuserage(document.getElementById("age").value = ""));
         }
 
         let Name = document.getElementById("name").value;
         let Email = document.getElementById("email").value;
         let Password = document.getElementById("pwd").value;
         let Age = Number(document.getElementById("age").value);
-        console.log( {age: Age,
-          name: Name,
-          email: Email,
-          password: Password});
+        // console.log( {age: Age,
+        //   name: Name,
+        //   email: Email,
+        //   password: Password});
         if (Name && Email && Password && Age) {
           Newuser({
-            age: Age,
             name: Name,
             email: Email,
             password: Password,
+            age: Age,
           });
           console.log(Newuser);
         }
