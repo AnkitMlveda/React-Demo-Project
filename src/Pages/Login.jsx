@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Userlogin } from '../Apicall';
+import { NavLink,useNavigate } from "react-router-dom";
 
 export default function Login(){
     let [getuemail,setemail] = useState("");
@@ -7,6 +9,8 @@ export default function Login(){
     let [getemailerror,setemailerror] = useState("");
     let [getpasserror,setpasserror] = useState("");
    
+    const navigate = useNavigate();
+
      function getemail(){
        setemail(document.getElementById("email").value);
      }
@@ -30,11 +34,18 @@ export default function Login(){
             setpasserror("");
         }
 
+        const username = document.getElementById("email").value;
+        const password = document.getElementById("pwd").value;
+        const loginuserData = Userlogin({ username, password });
+        console.log(loginuserData)
+
         if(getemailerror == "" && getpasserror == "" && getuemail != "" && getpass != ""){
-            alert('Sigup Sucessfully!');
+            alert('Login Sucessfully!');
             setemail(document.getElementById("email").value = "");
             setpass(document.getElementById("pwd").value = "");
         }
+
+        navigate('/movie');
     }
 
     return(
@@ -50,6 +61,11 @@ export default function Login(){
             <p className="errormsg">{getpasserror}</p>
           </div>
           <button type="submit" className="btn btn-primary" onClick={validateform}>Login</button>
+          <p className="text-muted">Not Register 
+            <NavLink className="nav-link custom" to="/signup">
+                    Signup
+            </NavLink>
+          </p>
         </form>
     );
 }
