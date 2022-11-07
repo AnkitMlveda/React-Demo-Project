@@ -1,71 +1,89 @@
-import { useState } from 'react';
-import { Userlogin } from '../Apicall';
-import { NavLink,useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { userLogin } from "../Apicall";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export default function Login(){
-    let [getuemail,setemail] = useState("");
-    let [getpass,setpass] = useState("");
+export default function Login() {
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
 
-    let [getemailerror,setemailerror] = useState("");
-    let [getpasserror,setpasserror] = useState("");
-   
-    const navigate = useNavigate();
+  let [emailError, setEmailError] = useState("");
+  let [passError, setPassError] = useState("");
 
-     function getemail(){
-       setemail(document.getElementById("email").value);
-     }
-     function getpassword(){
-       setpass(document.getElementById("pwd").value);
-     }
+  const navigate = useNavigate();
+  const queryclient = useQueryClient();
 
-    function validateform(e){
-        e.preventDefault();            
-        if(getuemail == ""){
-            setemailerror("Please Enter The Email");
-        }
-        else{
-            setemailerror("");
-        }
-        
-        if(getpass == ""){
-            setpasserror("Please Enter The Password");
-        }
-        else{
-            setpasserror("");
-        }
+  function onEmailChange(e) {
+    setEmail(e.target.value);
+  }
+  function onPasswordChange(e) {
+    setPassword(e.target.value);
+  }
 
-        const username = document.getElementById("email").value;
-        const password = document.getElementById("pwd").value;
-        const loginuserData = Userlogin({ username, password });
-        console.log(loginuserData)
-
-        if(getemailerror == "" && getpasserror == "" && getuemail != "" && getpass != ""){
-            alert('Login Sucessfully!');
-            setemail(document.getElementById("email").value = "");
-            setpass(document.getElementById("pwd").value = "");
-        }
-
-        navigate('/movie');
+  const { mutate } = useMutation(userLogin,{
+    onSuccess:(data) =>{
+      alert("Login Sucessfully!");
+      setEmail("");
+      setPassword("");
+      navigate("/movie");
     }
+    })
 
-    return(
-        <form id="login">
-          <div className="mb-3 mt-3">
-            <label className="form-label">Email:</label>
-            <input type="email" className="form-control col-md-3" id="email" placeholder="Enter email" value={getuemail} onChange={getemail}/>
-            <p className="errormsg">{getemailerror}</p>
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Password:</label>
-            <input type="password" className="form-control" id="pwd" placeholder="Enter password" value={getpass} onChange={getpassword}/>
-            <p className="errormsg">{getpasserror}</p>
-          </div>
-          <button type="submit" className="btn btn-primary" onClick={validateform}>Login</button>
-          <p className="text-muted">Not Register 
-            <NavLink className="nav-link custom" to="/signup">
-                    Signup
-            </NavLink>
-          </p>
-        </form>
-    );
+async function validateform(e) {
+    e.preventDefault();
+    if (email == "") {
+      setEmailError("Please Enter The Email");
+      return;
+    }
+    setEmailError("");
+    if (password == "") {
+      setPassError("Please Enter The Password");
+    }
+     setPassError("");
+    // const loginuserData = await userLogin({ username:email,password });
+    // console.log(loginuserData);
+    //   alert("Login Sucessfully!");
+    //   setEmail("");
+    //   setPassword("");
+    //   navigate("/movie");
+    mutate({ username:email,password });
+  }
+
+  return (
+    <form id="login" onSubmit={validateform}>
+      <div className="mb-3 mt-3">
+        <label className="form-label">Email:</label>
+        <input
+          type="email"
+          className="form-control col-md-3"
+          id="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={onEmailChange}
+        />
+        <p className="errormsg">{emailError}</p>
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Password:</label>
+        <input
+          type="password"
+          className="form-control"
+          id="pwd"
+          placeholder="Enter password"
+          value={password}
+          onChange={onPasswordChange}
+        />
+        <p className="errormsg">{passError}</p>
+      </div>
+      <button type="submit" className="btn btn-primary">
+        Login
+      </button>
+      <p className="text-muted">
+        Not Register
+        <NavLink className="nav-link custom" to="/signup">
+          Signup
+        </NavLink>
+      </p>
+    </form>
+  );
 }

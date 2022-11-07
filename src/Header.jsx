@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import "./Custom.css";
-//import { CurrentUser } from '../Apicall';
+// import { CurrentUser } from './Apicall';
 import { useLocation } from "react-router-dom";
 
 export default function Header() {
@@ -27,6 +27,8 @@ export default function Header() {
             </li>
           </ul>
         </div> */}
+        {/* console.log({member}); */}
+        {/* <p className="errormsg">Welcome,</p> */}
       </nav>
       {location === '/' ?
       <div>
