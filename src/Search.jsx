@@ -3,20 +3,49 @@ import "./Custom.css";
 export default function Search() {
   return (
     <div className="container-fluid">
-    <div className="cus-search row">
-      <form className="form-inline my-2 my-lg-0 row">
-        <input className="form-control col mlform searchmargin" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-primary my-2 my-sm-0 col-sm-1 searchmargin" type="submit">
-          Search
-        </button>
-        <button type="button" className="btn btn-primary my-2 my-sm-0 col-sm-1 searchmargin">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-sort-down" viewBox="0 0 16 16">
-            <path d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"></path>
-          </svg>
-          SortBy
-        </button>
-      </form>
-    </div>
+      <div className="cus-search row">
+        <form className="form-inline my-2 my-lg-0 row">
+          <input
+            className="form-control col mlform searchmargin"
+            type="text"
+            placeholder="Enter the limit"
+          />
+          <label className="col-auto cuslabel">Sort:</label>
+          <div className="col-sm-1">
+            <select className="form-select">
+              <option value="genres">genres</option>
+              <option value="cast">cast</option>
+              <option value="title">title</option>
+              <option value="year">year</option>
+              <option value="rating">rating</option>
+            </select>
+          </div>
+          <label className="col-auto cuslabel">SortOrder:</label>
+          <div className="col-auto">
+            <select className="form-select">
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
+          <input
+            className="form-control col mlform searchmargin"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button
+            className="btn btn-primary col-auto searchmargin"
+            type="submit"
+          >
+            Search
+          </button>
+          <input
+            className="form-control col mlform"
+            type="text"
+            placeholder="Enter the page Number you want to skip"
+          />
+        </form>
+      </div>
     </div>
   );
 }

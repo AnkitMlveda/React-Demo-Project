@@ -43,3 +43,21 @@ marquee {
 .text-muted {
     font-weight: bold !important;
 }
+.cuslabel {
+    line-height: 40px !important;
+}
+.dropdown-toggle::after {
+    position: relative;
+    top: 3px;
+    left: 4px;
+}
+.card-deck {
+    margin: 12px;
+}
+.card-img-top {
+    height: 250px;
+}
+.card {
+    height: 420px !important;
+    overflow: hidden !important;
+}

@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Suspense } from "react";
 
 const queryclient = new QueryClient({
   defaultOptions:{
@@ -19,11 +20,13 @@ const queryclient = new QueryClient({
 
 render(
   <React.StrictMode>
+    <Suspense fallback={<h1>Loading....</h1>}>
     <QueryClientProvider client={queryclient}>
       <BrowserRouter>
       <App />
       </BrowserRouter>
     </QueryClientProvider>
+    </Suspense>
   </React.StrictMode>,
   document.getElementById('root'),
 );

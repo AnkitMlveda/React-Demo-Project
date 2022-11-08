@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { userLogin } from "../Apicall";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+import { Usercontext } from "../Usercontext";
 
 export default function Login() {
+  const [user,setUser] = useContext(Usercontext);
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
 
@@ -11,7 +13,6 @@ export default function Login() {
   let [passError, setPassError] = useState("");
 
   const navigate = useNavigate();
-  const queryclient = useQueryClient();
 
   function onEmailChange(e) {
     setEmail(e.target.value);
@@ -22,9 +23,8 @@ export default function Login() {
 
   const { mutate } = useMutation(userLogin,{
     onSuccess:(data) =>{
-      alert("Login Sucessfully!");
-      setEmail("");
-      setPassword("");
+      setUser(data);
+      
       navigate("/movie");
     }
     })
