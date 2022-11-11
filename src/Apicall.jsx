@@ -24,15 +24,33 @@ export const CurrentUser = () =>
     })
     .then((res) => res.data);
 
-export const Movies = () =>
-  movieAxios
+// export const Movies = () =>
+//   movieAxios
+//     .get("/movies", {
+//       headers: { Authorization: `Bearer ${token}` },
+//       params:{
+//         sort: "cast",
+//         sortOrder: "asc",
+//       }
+//     })
+//     .then((res) => res.data);
+
+export const Movies = ({
+  queryKey: [
+    ,
+    { sort = "genres", sortOrder = "asc", searchText = "", limit, skipData },
+  ],
+}) => {
+  const params = { sort: sort, sortOrder: sortOrder };
+  if (searchText) params["searchText"] = searchText;
+  if (limit) params["limit"] = Number.parseInt(limit);
+  if (skipData) params["skip"] = Number.parseInt(skipData);
+  return movieAxios
     .get("/movies", {
       headers: { Authorization: `Bearer ${token}` },
-      params:{
-        sort: "cast",
-        sortOrder: "asc",
-      }
+      params,
     })
     .then((res) => res.data);
+};
 
 export default movieAxios;
