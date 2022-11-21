@@ -55,9 +55,42 @@ marquee {
     margin: 12px;
 }
 .card-img-top {
-    height: 250px;
+    height: 420px;
 }
 .card {
-    height: 420px !important;
+    height: 1420px !important;
     overflow: hidden !important;
 }
+.sticky-top {
+    display: block !important;
+}
+.custom1{
+    border: 1px solid #4069ff !important;
+    padding: 6px !important;
+    width: 80px !important;
+    background-color: #4069ff !important;
+    color: #fff !important;
+    font-weight: bold !important;
+    margin-top: 12px !important;
+    border-radius: 4px;
+}
+.custom1:hover{
+    border: 1px solid #4069ff !important;
+    padding: 6px !important;
+    width: 80px !important;
+    background-color: #4069ff !important;
+    color: #fff !important;
+    font-weight: bold !important;
+    margin-top: 12px !important;
+    box-shadow: 0 -4px 14px rgb(0 0 0 / 25%), 0 5px 8px rgb(0 0 0 / 22%) !important;
+    border-radius: 4px;
+}
+.logintext {
+    float: right;
+}
+/* .card-deck {
+    margin: 12px;
+}
+.card-img-top {
+    height: 420px;
+} */
